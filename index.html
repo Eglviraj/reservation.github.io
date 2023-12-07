@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Thineth Health Care</title>
+    <!--link rel="icon" type="image/png" href="D:\Salinda ayiya\WEB PROJECTS\PROJECT 5\favicon.ico"-->
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-firestore.js"></script>
+
+	<!-- Firebase configuration -->
+	<script>
+		var firebaseConfig = {
+			apiKey: "AIzaSyCSZwK_nSchRNq-LB7z6BjC4sjkFGYmuVo",
+            authDomain: "db-kjm.firebaseapp.com",
+            databaseURL: "https://db-kjm-default-rtdb.firebaseio.com",
+            projectId: "db-kjm",
+            storageBucket: "db-kjm.appspot.com",
+            messagingSenderId: "628465751328",
+            appId: "1:628465751328:web:416703493dd3fede923345",
+            measurementId: "G-12ZRWZEBP1"
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+		// Get reference to Firebase database
+		var database = firebase.database();
+		var auth = firebase.auth();
+	</script>
+
+
+    <style>
+      /* Style the logo to display at the top center of the page */
+      img.logo {
+        display: block;
+        margin: 0 auto;
+        width: 400px; /* Set the width of the image to 200 pixels */
+        height: auto; /* Let the height adjust proportionally */
+        text-align: center;
+      }
+    </style>
+
+<style>
+    /* Style the navigation bar */
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      color: #fff;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+
+    /* Style the navigation links */
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 30px;
+      text-align: center;
+      flex: 1;
+      padding: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #555;
+    }
+  </style>
+
+<style>
+    form {
+      width: 50%;
+      margin: 0 auto;
+      /* Optional: add some padding and a border */
+      padding: 20px;
+      /*border: 1px solid #ccc; */
+    
+        margin: 0 auto;
+        text-align: center;
+      }
+      
+      button {
+        padding: 10px;
+        border: 1px solid #ccc; 
+      }
+
+  </style>
+
+
+<script>
+    // Initialize Firebase
+    var firebaseConfig = {
+      // Your Firebase project configuration here
+    };
+    firebase.initializeApp(firebaseConfig);
+    
+    // Get a reference to the database
+    var database = firebase.database();
+    
+    // Get a reference to the dropdown list element
+    var dropdownList = document.getElementById("myDropdown");
+    
+    // Attach a listener for changes to the "items" collection in the database
+    database.ref("num").on("value", function(snapshot) {
+      // Clear the existing options in the dropdown list
+      dropdownList.innerHTML = "";
+      
+      // Loop through the items in the snapshot and add them as options to the dropdown list
+      snapshot.forEach(function(childSnapshot) {
+        var option = document.createElement("option");
+        option.value = childSnapshot.key;
+        option.text = childSnapshot.val().name;
+        dropdownList.appendChild(option);
+      });
+    });
+  </script>
+
+<style>
+    /* CSS styles for input text box */
+    input[type="text"] {
+      width: 300px;
+      height: 40px;
+      font-size: 20px;
+      padding: 5px;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+  </style>
+
+  
+<style>
+    #settings {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #ccc;
+        color: #000;
+        padding: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+</style>
+
+<style>
+  .dialog {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .dialog-content {
+    background-color: white;
+    width: 80%;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  .dialog-content h2 {
+    margin-top: 0;
+  }
+</style>
+
+
+
+  </head>
+  <meta name="google-site-verification" content="XmqUc6kpy_jpYKlLM31uNhqe1LA-R4kuSPlz9FF-dWY" />
+  <body>
+    <!-- Logo -->
+    <img class="logo" src=https://i.imgur.com/5AFJXdb.jpg alt="My Website Logo">
+    <!--a id="settings" href="#">Settings</a-->
+    <!-- Page content -->
+    <!--button position: fixed; top: 10px; right: 100px; onclick="showDialog()">Show Dialog</button-->
+
+    <form onsubmit="addRecord(event)">
+        <!--label for="myDropdown">Select an item:</label><br>
+        <select id="myDropdown"></select><br-->
+        <select onchange="document.getElementById('name').focus();" id="dataList" style="width: 300px; height: 40px; font-size: 20px;" > </select><br><br>
+		<!--label for="name">Name:</label-->
+		<input type="text" id="name" name="name" size="28" placeholder="Name"  required><br><br>
+		<!--label for="email">Email:</label-->
+		<input type="text" id="email" name="email" placeholder="Phone number" required><br><br>
+		<button type="submit" style="width: 300px; font-size: 20px;">Add Record</button>
+        <!--label for="myDropdown">Select an item:</-->
+        <!--select id="myDropdown"></select--><br>
+        
+
+	</form>
+	
+  <!--button onclick="showDialog()" top: 10px; right: 10px;>Show Dialog</button-->
+
+	<script>
+		function addRecord(event) {
+			event.preventDefault();
+			// Get form values
+			var name = document.getElementById("name").value;
+			var email = document.getElementById("email").value;
+            var time = document.getElementById("dataList").value;
+            var dropdown_time = document.getElementById("dataList");
+            var selectedTime = dropdown_time.options[dropdown_time.selectedIndex].text;
+            var trimmedTime = selectedTime.substring(0, selectedTime.length - 5);
+
+			// Generate a new key for the record
+			var newRecordKey = database.ref().child("Books").push().key;
+			// Define the data to be saved
+			var data = {
+				author: name,
+				isbn: "("+ time + ")",
+				category: trimmedTime,
+				title: "web app :"+ email
+				
+			};
+			// Save the data to Firebase
+			database.ref("Books/" + newRecordKey).set(data)
+            database.ref("num/" + time).remove()  
+            
+              
+			.then(function() {
+				alert(name + " your Record added successfully! \n Time :" + trimmedTime);
+              document.getElementById("name").value="";
+              document.getElementById("email").value="";
+
+// Get a reference to the Firebase Realtime Database
+//var database = firebase.database();
+var currentDate = new Date();
+var dateString = currentDate.toISOString();
+
+// Get a reference to the Books node in the Firebase Realtime Database
+var booksRef = database.ref("Log");
+
+// Query the number of records in the Books node
+booksRef.once("value").then(function(snapshot) {
+    var recordCount = snapshot.numChildren();
+
+    // Create a new record object
+    var newRecord = {
+        name: name,
+        time: trimmedTime,
+        phone: email,
+        date: dateString
+    };
+
+    // Add the new record to the Firebase Realtime Database with the custom key
+    var updates = {};
+    updates["/Log/" + recordCount] = newRecord;
+    database.ref().update(updates);
+});
+
+			})
+			.catch(function(error) {
+				console.error(error);
+			});
+           
+		}
+	</script>
+
+
+
+<script>
+
+		// Get reference to Firebase database node
+		var dataNodeRef = database.ref("num");
+		
+		// Add event listener to the Firebase database node to populate drop-down list with data
+		dataNodeRef.on("value", function(snapshot) {
+			var dataList = document.getElementById("dataList" );
+			dataList.innerHTML = "";
+			snapshot.forEach(function(childSnapshot) {
+				var dataKey = childSnapshot.key;
+				var dataValue = childSnapshot.val().res;
+				dataList.options.add(new Option(dataValue, dataKey));
+			});
+		});
+  </script>
+
+
+<div id="dialog" class="dialog">
+  <div class="dialog-content">
+    <h2>Dialog Title</h2>
+    <p>Dialog content goes here...</p>
+    <button onclick="hideDialog()">Close</button>
+  </div>
+</div>
+
+<script>
+  function showDialog() {
+    var dialog = document.getElementById('dialog');
+    dialog.style.display = 'block';
+  }
+
+  function hideDialog() {
+    var dialog = document.getElementById('dialog');
+    dialog.style.display = 'none';
+    
+
+
+
+
+
+
+  }
+</script>
+   
+
+    <nav>
+       
+          <h3>THINETH HELTH CARE™ 2023 devoloped by E G Lasantha Viraj   </h3>
+
+      </nav>
+
+  </body>
+</html>
