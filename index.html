@@ -209,7 +209,7 @@
             var time = document.getElementById("dataList").value;
             var dropdown_time = document.getElementById("dataList");
             var selectedTime = dropdown_time.options[dropdown_time.selectedIndex].text;
-            var trimmedTime = selectedTime.substring(0, selectedTime.length - 5);
+            var trimmedTime = selectedTime.substring(7);
 
 			// Generate a new key for the record
 			var newRecordKey = database.ref().child("Books").push().key;
