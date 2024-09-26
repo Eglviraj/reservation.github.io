@@ -267,7 +267,7 @@ booksRef.once("value").then(function(snapshot) {
 
 
 
-<script>
+<!--script>
 
 		// Get reference to Firebase database node
 		var dataNodeRef = database.ref("num");
@@ -282,8 +282,31 @@ booksRef.once("value").then(function(snapshot) {
 				dataList.options.add(new Option(dataValue, dataKey));
 			});
 		});
-  </script>
+  </script-->
+<script>
 
+// Get reference to Firebase database node
+		var dataNodeRef = database.ref("num");
+
+  dataNodeRef.on("value", function(snapshot) {
+  var dataList = document.getElementById("dataList");
+  dataList.innerHTML = "";
+
+  snapshot.forEach(function(childSnapshot) {
+    var dataKey = childSnapshot.key;
+    var dataValue = childSnapshot.val().res;
+
+    // Cut the last 4 characters
+    var last4Chars = dataValue.substr(-4);
+    var remainingChars = dataValue.slice(0, -4);
+
+    // Combine the cut characters with the remaining characters
+    var modifiedDataValue = last4Chars + ' - ' + remainingChars;
+
+    dataList.options.add(new Option(modifiedDataValue, dataKey));
+  });
+});
+</script>
 
 <div id="dialog" class="dialog">
   <div class="dialog-content">
